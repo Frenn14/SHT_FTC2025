@@ -31,5 +31,5 @@
     * 가독성 개선 및 중복 제거
   
 ### 예제 코드 (로컬)
-* DriveBase & Headless : [열기](file://shtkit/src/main/java/com/shtrobotice/ShtKit/samples/BasicDriveBase.java)
+* DriveBase & Headless : [/shtkit/src/main/java/com/shtrobotice/ShtKit/samples/BasicDriveBase.java](file://shtkit/src/main/java/com/shtrobotice/ShtKit/samples/BasicDriveBase.java)
 ---
