@@ -30,6 +30,6 @@
 * 기존 모터 Drive 코드 리팩토링
     * 가독성 개선 및 중복 제거
   
-### 예제 코드 (로컬)
+### 예제 코드
 * DriveBase & Headless : [/shtkit/src/main/java/com/shtrobotice/ShtKit/samples/BasicDriveBase.java](file://shtkit/src/main/java/com/shtrobotice/ShtKit/samples/BasicDriveBase.java)
 ---
