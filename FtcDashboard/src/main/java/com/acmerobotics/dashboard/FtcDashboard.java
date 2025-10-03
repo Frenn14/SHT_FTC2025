@@ -1201,7 +1201,7 @@ public class FtcDashboard implements OpModeManagerImpl.Notifications {
     private void internalRegisterOpMode(OpModeManager manager) {
         manager.register(
             new OpModeMeta.Builder()
-                .setName("Enable/Disable Dashboard")
+                .setName("ON/OFF Dashboard")
                 .setFlavor(OpModeMeta.Flavor.TELEOP)
                 .setGroup("dash")
                 .build(),
@@ -1209,9 +1209,9 @@ public class FtcDashboard implements OpModeManagerImpl.Notifications {
                 @Override
                 public void runOpMode() throws InterruptedException {
                     telemetry.log().add(
-                        Misc.formatInvariant("Dashboard is currently %s. Press Start to %s it.",
-                            core.enabled ? "enabled" : "disabled",
-                            core.enabled ? "disable" : "enable"));
+                        Misc.formatInvariant("현재 상태 : %s\n 플레이 버튼을 눌러 %s 로 변경",
+                            core.enabled ? "ON" : "OFF",
+                            core.enabled ? "OFF" : "ON"));
                     telemetry.update();
 
                     waitForStart();
