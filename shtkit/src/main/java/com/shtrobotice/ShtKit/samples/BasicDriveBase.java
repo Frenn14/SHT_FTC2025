@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.*;
 import com.shtrobotice.ShtKit.hardware.DriveBase;
 
 @TeleOp(name = "BasicDriveBase", group = "ShtKit")
-@Disabled
 public class BasicDriveBase extends LinearOpMode {
 
     @Override
