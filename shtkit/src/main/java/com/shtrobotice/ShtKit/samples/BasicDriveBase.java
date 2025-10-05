@@ -6,6 +6,13 @@ import com.shtrobotice.ShtKit.hardware.DriveBase;
 @TeleOp(name = "BasicDriveBase", group = "ShtKit")
 public class BasicDriveBase extends LinearOpMode {
 
+    /*
+     * 드라이브 베이스 제어를 위한 DriveBase class 예제 코드
+     *
+     * DriveBase 사용을 위한 선언은 필수입니다.
+     * 선언 이외 세부 조정 및 기능 사용을 위한 함수는 선택적으로 사용 가능합니다.
+     */
+
     @Override
     public void runOpMode() {
         /*
@@ -26,8 +33,17 @@ public class BasicDriveBase extends LinearOpMode {
          * - 값: DriveBase.MotorBrake.BRAKE 또는 DriveBase.MotorBrake.FLOAT
          *
          * 3. 모터 방향 설정 (선택)
-         * - 역할: 제동 시 모터 정/역방향 회전
          * - 값: DriveBase.Direction.FORWARD 또는 DriveBase.Direction.REVERSE
+         *   - FORWARD:
+         *     - LEFTFRONT : 역방향
+         *     - LEFTBACK  : 역방향
+         *     - RIGHTFRONT: 정방향
+         *     - RIGHTBACK : 정방향
+         *   - REVERSE:
+         *     - LEFTFRONT : 정방향
+         *     - LEFTBACK  : 정방향
+         *     - RIGHTFRONT: 역방향
+         *     - RIGHTBACK : 역방향
          *
          * 4. 조작 스틱 정의 (선택)
          * - 역할: 로봇 제동 시 기준이 되는 스틱 입력
@@ -52,9 +68,24 @@ public class BasicDriveBase extends LinearOpMode {
         drivebase.setBreak(DriveBase.MotorBrake.BRAKE);
 
        /*
-        * 제동 시 모터 정/역방향 회전를 변경하는 함수입니다.
+        * 제동 시 모터 개별의 정/역방향 회전를 변경하는 함수입니다.
         */
-        drivebase.setDirection(DriveBase.Direction.FORWARD);
+        drivebase.setDirection(DriveBase.MotorDirection.RIGHTFRONT, DriveBase.Direction.FORWARD);
+
+       /*
+        * ================================
+        * 로봇 드라이브 GovernorKey 설정
+        * ================================
+        *
+        * 설명 : 로봇의 속도를 조절하는 키 추가
+        *
+        * 1. min/max 정의
+        * - 값 : 키에서 입력되는 최소, 최대 값을 정의합니다.
+        * (아래 코드의 경우 스틱 Y를 위쪽으로 올렸을 때 -1 아래로 내렸을 때 1이 나오기에 min 1.0, max -1.0 설정
+        *
+        * ================================
+        */
+        drivebase.setGovernor(()->gamepad1.right_stick_y, 1.0, -1.0);
 
        /*
         * ================================

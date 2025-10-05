@@ -20,15 +20,22 @@ public class DriveBase {
     DcMotor rf;
     DcMotor rb;
     MotorBrake brake;
-    Direction revered;
     Supplier<Float> pdx;
     Supplier<Float> pdy;
     Supplier<Float> pdr;
+    Supplier<Float> gKey;
+    Boolean vRevered;
+    Double minValue;
+    Double maxValue;
     GoBildaPinpointDriver pp;
     Direction ppRevered;
 
     public enum Direction {
         FORWARD, REVERSE
+    }
+
+    public enum MotorDirection {
+        LEFTFRONT, LEFTBACK, RIGHTFRONT, RIGHTBACK
     }
 
     public enum MotorBrake {
@@ -43,11 +50,11 @@ public class DriveBase {
         this(hardwareMap, gamepad, leftFront, leftBack, rightFront, rightBack, brake, Direction.FORWARD, ()->gamepad.left_stick_x, ()->-gamepad.left_stick_y, ()->gamepad.right_stick_x);
     }
 
-    public DriveBase(HardwareMap hardwareMap, Gamepad gamepad, String leftFront, String leftBack, String rightFront, String rightBack, MotorBrake brake, Direction revered) {
-        this(hardwareMap, gamepad, leftFront, leftBack, rightFront, rightBack, brake, revered, ()->gamepad.left_stick_x, ()->-gamepad.left_stick_y, ()->gamepad.right_stick_x);
+    public DriveBase(HardwareMap hardwareMap, Gamepad gamepad, String leftFront, String leftBack, String rightFront, String rightBack, MotorBrake brake, Direction motorDirection) {
+        this(hardwareMap, gamepad, leftFront, leftBack, rightFront, rightBack, brake, motorDirection, ()->gamepad.left_stick_x, ()->-gamepad.left_stick_y, ()->gamepad.right_stick_x);
     }
 
-    public DriveBase(HardwareMap hardwareMap, Gamepad gamepad, String leftFront, String leftBack, String rightFront, String rightBack, MotorBrake brake, Direction revered, Supplier<Float> stickX, Supplier<Float> stickY, Supplier<Float> stickR){
+    public DriveBase(HardwareMap hardwareMap, Gamepad gamepad, String leftFront, String leftBack, String rightFront, String rightBack, MotorBrake brake, Direction motorDirection, Supplier<Float> stickX, Supplier<Float> stickY, Supplier<Float> stickR){
         hm = hardwareMap;
         gp = gamepad;
 
@@ -62,12 +69,19 @@ public class DriveBase {
 
         setBreak(brake);
 
-        setDirection(revered);
+        Direction _r = (motorDirection == Direction.FORWARD) ? Direction.REVERSE : Direction.FORWARD;
+
+        setDirection(MotorDirection.LEFTFRONT, _r);
+        setDirection(MotorDirection.LEFTBACK, _r);
+        setDirection(MotorDirection.RIGHTFRONT, motorDirection);
+        setDirection(MotorDirection.RIGHTBACK, motorDirection);
 
         pp = null;
+        gKey = null;
+        vRevered = null;
     }
 
-    public void setHeadless(String name, int xOffset, int yOffset, Direction revered) {
+    public void setHeadless(String name, Integer xOffset, Integer yOffset, Direction revered) {
         pp = hm.get(GoBildaPinpointDriver.class, name);
         pp.setOffsets(xOffset,yOffset, DistanceUnit.MM);
         pp.resetPosAndIMU();
@@ -94,24 +108,22 @@ public class DriveBase {
         }
     }
 
-    public void setDirection(Direction revered) {
-        this.revered = revered;
+    public void setDirection(MotorDirection motorDirection ,Direction direction) {
+        DcMotorSimple.Direction _direction = (direction == Direction.FORWARD) ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE;
 
-        switch (this.revered) {
-            case FORWARD:
-                rf.setDirection(DcMotorSimple.Direction.FORWARD);
-                rb.setDirection(DcMotorSimple.Direction.FORWARD);
-                lf.setDirection(DcMotorSimple.Direction.REVERSE);
-                lb.setDirection(DcMotorSimple.Direction.REVERSE);
-                break;
-            case REVERSE:
-                rf.setDirection(DcMotorSimple.Direction.REVERSE);
-                rb.setDirection(DcMotorSimple.Direction.REVERSE);
-                lf.setDirection(DcMotorSimple.Direction.FORWARD);
-                lb.setDirection(DcMotorSimple.Direction.FORWARD);
-                break;
+        switch (motorDirection) {
+            case LEFTFRONT: lf.setDirection(_direction); break;
+            case LEFTBACK: lb.setDirection(_direction); break;
+            case RIGHTFRONT: rf.setDirection(_direction); break;
+            case RIGHTBACK: rb.setDirection(_direction); break;
             default: break;
         }
+    }
+
+    public void setGovernor(Supplier<Float> governorKey, Double minValue, Double maxValue) {
+        gKey = governorKey;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
     }
 
     public void update() {
@@ -152,9 +164,12 @@ public class DriveBase {
             rbp /= max;
         }
 
-        lf.setPower(lfp);
-        lb.setPower(lbp);
-        rf.setPower(rfp);
-        rb.setPower(rbp);
+        double _p = 1.0;
+        if (gKey != null) _p = (gKey.get() - minValue) / (maxValue - minValue);
+
+        lf.setPower(lfp * _p);
+        lb.setPower(lbp * _p);
+        rf.setPower(rfp * _p);
+        rb.setPower(rbp * _p);
     }
 }
