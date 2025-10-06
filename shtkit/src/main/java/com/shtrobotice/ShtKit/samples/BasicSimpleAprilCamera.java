@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.*;
 import com.shtrobotice.ShtKit.hardware.SimpleCamera;
 
 @TeleOp(name = "BasicSimpleAprilCamera", group = "ShtKit")
+@Disabled
 public class BasicSimpleAprilCamera extends LinearOpMode {
 
     /*
