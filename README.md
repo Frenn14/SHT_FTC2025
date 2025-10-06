@@ -26,7 +26,7 @@
   * `SimpleCamera` 사용 가능
 * April Tag 인식 지원
   * `SimpleCamera.Pipeline.APRIL_TAG` Pipeline 사용
-  * `addTaggingAction()` 및 `addNotTaggingAction` 사용
+  * `addTaggingAction()` 및 `addNotTaggingAction()` 사용
 * 각 목적 별 Pipeline 지원
   * 종류
     * NORMAL        : 기본 카메라 화면을 출력
