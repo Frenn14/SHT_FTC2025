@@ -16,6 +16,30 @@
   * 기능별 사용성 개선
 
 ---
+## Releases v2.0 (2025-10-06)
+### SimpleCamera
+#### 일반 카메라 사용 및 April Tag 인식 클레스
+
+* 기존 카메라 OpenCV 코드 리팩토링
+  * 가독성 개선 및 중복 제거
+* 카메라 클래스 추가
+  * `SimpleCamera` 사용 가능
+* April Tag 인식 지원
+  * `SimpleCamera.Pipeline.APRIL_TAG` Pipeline 사용
+  * `addTaggingAction()` 및 `addNotTaggingAction` 사용
+* 각 목적 별 Pipeline 지원
+  * 종류
+    * NORMAL        : 기본 카메라 화면을 출력
+    * INVERTED      : 색 반전 카메라 화면을 출력
+    * FILTER_RED    : 빨강색 필터 카메라 화면을 출력
+    * FILTER_BLUE   : 파란색 필터 카메라 화면을 출력
+    * FILTER_YELLOW : 노란색 필터 카메라 화면을 출력
+    * GRAY_SCALE    : 흑백 카메라 화면을 출력
+    * APRIL_TAG     : April Tag 인식용 모드 (기본 카메라 화면)
+
+### 예제 코드
+* DriveBase & Headless : /shtkit/src/main/java/com/shtrobotice/ShtKit/samples/BasicSimpleCamera.java
+---
 ## Releases v1.1 (2025-10-05)
 ### DriveBase
 #### 주행 기반 코드 통합 클래스
@@ -33,14 +57,14 @@
 ### DriveBase
 #### 주행 기반 코드 통합 클래스
 
+* 기존 모터 Drive 코드 리팩토링
+  * 가독성 개선 및 중복 제거
 * 로봇 베이스 드라이브 클래스 추가
     * `DriveBase` 사용 가능
 * Headless 드라이브 지원
     * 필드 기준 이동 가능
     * `GoBildaPinpoint` 사용
-* 기존 모터 Drive 코드 리팩토링
-    * 가독성 개선 및 중복 제거
   
-### 예제 코드 (로컬)
+### 예제 코드
 * DriveBase & Headless : /shtkit/src/main/java/com/shtrobotice/ShtKit/samples/BasicDriveBase.java
 ---
