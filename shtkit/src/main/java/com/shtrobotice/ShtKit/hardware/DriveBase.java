@@ -1,5 +1,6 @@
 package com.shtrobotice.ShtKit.hardware;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -28,10 +29,15 @@ public class DriveBase {
     Double minValue;
     Double maxValue;
     GoBildaPinpointDriver pp;
+    BNO055IMU imu;
     Direction ppRevered;
 
     public enum Direction {
         FORWARD, REVERSE
+    }
+
+    public enum IMUType {
+        BNO055IMU, PINPOINT
     }
 
     public enum MotorDirection {
@@ -81,10 +87,23 @@ public class DriveBase {
         vRevered = null;
     }
 
-    public void setHeadless(String name, Integer xOffset, Integer yOffset, Direction revered) {
-        pp = hm.get(GoBildaPinpointDriver.class, name);
-        pp.setOffsets(xOffset,yOffset, DistanceUnit.MM);
-        pp.resetPosAndIMU();
+    public void setHeadless(IMUType type, String name, Integer xOffset, Integer yOffset, Direction revered) {
+        pp = null;
+        imu = null;
+        switch (type) {
+            case PINPOINT:
+                pp = hm.get(GoBildaPinpointDriver.class, name);
+                pp.setOffsets(xOffset,yOffset, DistanceUnit.MM);
+                pp.resetPosAndIMU();
+                break;
+            case BNO055IMU:
+                imu = hm.get(BNO055IMU.class, name);
+                BNO055IMU.Parameters para = new BNO055IMU.Parameters();
+                para.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+                imu.initialize(para);
+                break;
+            default:break;
+        }
         ppRevered = revered;
     }
 
@@ -145,6 +164,20 @@ public class DriveBase {
 
             ix = pdx.get() * Math.cos(heading) - pdy.get() * Math.sin(heading);
             iy = pdx.get() * Math.sin(heading) + pdy.get() * Math.cos(heading);
+        }
+
+        if(imu != null) {
+            double heading = 0;
+
+            switch (ppRevered) {
+                case FORWARD: heading = imu.getAngularOrientation().firstAngle; break;
+                case REVERSE: heading = -imu.getAngularOrientation().firstAngle; break;
+                default: break;
+            }
+            double temp = ix * Math.cos(heading) + iy * Math.sin(heading);
+
+            iy = -ix * Math.sin(heading) + iy * Math.cos(heading);
+            ix = temp;
         }
 
         double lfp = iy + ix + is;

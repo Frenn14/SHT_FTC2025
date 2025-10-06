@@ -16,6 +16,14 @@
   * 기능별 사용성 개선
 
 ---
+## Releases v2.1 (2025-10-06)
+### DriveBase
+#### 주행 기반 코드 통합 클래스
+
+* Headless 드라이브 Control Hub 내장 imu 지원
+  * Control Hub 내장 imu `BNO055IMU` 추가
+* 예제 코드 설명 주석 가독성 개선
+---
 ## Releases v2.0 (2025-10-06)
 ### SimpleCamera
 #### 일반 카메라 사용 및 April Tag 인식 클레스

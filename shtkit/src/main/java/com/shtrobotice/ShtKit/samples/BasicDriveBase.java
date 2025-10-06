@@ -96,21 +96,25 @@ public class BasicDriveBase extends LinearOpMode {
         * 설명:
         * - 로봇이 어떤 각도로 있어도 필드 기준으로 이동 가능
         *
-        * 1. Pinpoint 정의 (필수)
-        * - Configure 이름으로 등록 필수
-        * - 사용 라이브러리: GoBildaPinpoint
+        * 1. IMU Type 정의 (필수)
+        * - 역할: 회전 센서 'Pinpoint' or 'Control Hub 내장 센서' 사용 여부 정의
+        * - 값: DriveBase.IMUType.PINPOINT or DriveBase.IMUType.BNO055IMU
         *
-        * 2. 위치 정의 (필수)
+        * 2. 이름 정의 (필수)
+        * - Configure 이름으로 등록 필수
+        * - 사용 라이브러리: GoBildaPinpoint, BNO055IMU
+        *
+        * 3. 위치 정의 (필수)
         * - 로봇 중앙 기준 Pinpoint 위치 지정
         * - 단위: mm (로봇 중앙 → Pinpoint 중앙 거리)
         *
-        * 3. 모터 방향 설정 (필수)
+        * 4. 모터 방향 설정 (필수)
         * - 역할: 제동 시 Headless 좌/우 반전
         * - 값: DriveBase.Direction.FORWARD 또는 DriveBase.Direction.REVERSE
         *
         * ================================
         */
-        drivebase.setHeadless("pin", 0,0, DriveBase.Direction.REVERSE);
+        drivebase.setHeadless(DriveBase.IMUType.BNO055IMU,"pin", 0,0, DriveBase.Direction.REVERSE);
 
         waitForStart();
 
