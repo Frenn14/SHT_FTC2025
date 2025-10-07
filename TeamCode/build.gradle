@@ -18,6 +18,14 @@ apply from: '../build.dependencies.gradle'
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+
+        // Core Library Desugaring 활성화
+        coreLibraryDesugaringEnabled true
+    }
+
     packagingOptions {
         jniLibs.useLegacyPackaging true
     }
@@ -27,4 +35,5 @@ dependencies {
     implementation project(':FtcRobotController')
     implementation project(':shtkit')
     implementation project(':FtcDashboard')
+    implementation project(':RoadRunner')
 }

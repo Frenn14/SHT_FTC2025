@@ -4,28 +4,23 @@ plugins {
     id 'com.android.library'
 }
 
-repositories {
-    maven {
-        url = 'https://maven.brott.dev/'
-    }
-}
-
+repositories { maven { url = 'https://maven.brott.dev/' } }
 
 android {
     namespace 'com.shtrobotice.ShtKit'
 
+    compileSdkVersion 35
+
     defaultConfig {
         minSdkVersion 24
         //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 28
+        targetSdkVersion 35
         buildConfigField "String", "APP_BUILD_TIME", '"' + (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ROOT).format(new Date())) + '"'
     }
 
     buildFeatures {
         buildConfig = true
     }
-
-    compileSdkVersion 30
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -36,10 +31,7 @@ android {
 dependencies {
     implementation project(':FtcRobotController')
     implementation project(':FtcDashboard')
+    implementation project(':RoadRunner')
     implementation 'org.openftc:easyopencv:1.7.3'
     implementation 'org.openftc:apriltag:2.1.0'
-    implementation "com.acmerobotics.roadrunner:ftc:0.1.23"
-    implementation "com.acmerobotics.roadrunner:core:1.0.1"
-    implementation "com.acmerobotics.roadrunner:actions:1.0.1"
-    implementation "com.acmerobotics.dashboard:dashboard:0.4.17"
 }
