@@ -20,6 +20,18 @@
   * SimpleCamera
 
 ---
+## Releases v2.3 (2025-10-07)
+## RoadRunner 모듈 추가 및 버전 정리 업데이트
+
+* RoadRunner 모듈 지원
+  * learnRoadrunner 코드 사용 가능
+* 프로젝트 Version 개선
+  * 빌드시 버전 Warning 개선
+  * Java 버전 8 에서 11로 변경
+  * Android 버전 개선
+  * dependencies SDK 버전 호환성 개선
+
+---
 ## Releases v2.2 (2025-10-07)
 ## 코드 간소화 및 사용성 개선 업데이트
 
