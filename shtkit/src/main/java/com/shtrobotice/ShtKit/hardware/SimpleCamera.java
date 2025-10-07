@@ -45,15 +45,19 @@ public class SimpleCamera {
         NORMAL, INVERTED, FILTER_RED, FILTER_BLUE, FILTER_YELLOW, GRAY_SCALE, APRIL_TAG
     }
 
-    public SimpleCamera(HardwareMap hardwareMap, String WebcamName) {
-        this(hardwareMap, WebcamName, Pipeline.NORMAL, 640, 480);
+    public SimpleCamera(HardwareMap hardwareMap) {
+        this(hardwareMap, Pipeline.NORMAL, "Webcam 1", 640, 480);
     }
 
-    public SimpleCamera(HardwareMap hardwareMap, String WebcamName, Pipeline pipeline) {
-        this(hardwareMap, WebcamName, pipeline, 640, 480);
+    public SimpleCamera(HardwareMap hardwareMap, Pipeline pipeline) {
+        this(hardwareMap, pipeline, "Webcam 1", 640, 480);
     }
 
-    public SimpleCamera(HardwareMap hardwareMap, String WebcamName, Pipeline pipeline, Integer width, Integer height) {
+    public SimpleCamera(HardwareMap hardwareMap,  Pipeline pipeline, String WebcamName) {
+        this(hardwareMap, pipeline, WebcamName, 640, 480);
+    }
+
+    public SimpleCamera(HardwareMap hardwareMap,  Pipeline pipeline, String WebcamName, Integer width, Integer height) {
         hm = hardwareMap;
 
         id = hardwareMap.appContext.getResources()

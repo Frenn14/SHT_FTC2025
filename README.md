@@ -20,7 +20,28 @@
   * SimpleCamera
 
 ---
+## Releases v2.2 (2025-10-07)
+#### 코드 간소화 및 사용성 개선 업데이트
+
+### DriveBase
+#### 주행 기반 코드 통합 클래스
+
+* 필수 인자 제외 모든 인자에 기본값 사용
+  * 하드웨어 이름 정의 기본값 지원
+  * 세부 설정 정의 기본값 지원
+* 예제 코드 설명 주석 가독성 개선
+
+### SimpleCamera
+#### 일반 카메라 사용 및 April Tag 인식 클레스
+
+* 필수 인자 제외 모든 인자에 기본값 사용
+  * 하드웨어 이름 정의 기본값 지원
+* 예제 코드 설명 주석 가독성 개선
+
+---
 ## Releases v2.1 (2025-10-06)
+#### 지원 기능 추가 업데이트
+
 ### DriveBase
 #### 주행 기반 코드 통합 클래스
 
@@ -29,6 +50,8 @@
 * 예제 코드 설명 주석 가독성 개선
 ---
 ## Releases v2.0 (2025-10-06)
+#### 새 클레스 추가 업데이트
+
 ### SimpleCamera
 #### 일반 카메라 사용 및 April Tag 인식 클레스
 
@@ -53,6 +76,8 @@
 * DriveBase & Headless : /shtkit/src/main/java/com/shtrobotice/ShtKit/samples/BasicSimpleCamera.java
 ---
 ## Releases v1.1 (2025-10-05)
+#### 기능 함수 추가 업데이트
+
 ### DriveBase
 #### 주행 기반 코드 통합 클래스
 
@@ -65,6 +90,7 @@
 
 ---
 ## Releases v1.0 (2025-10-04)
+#### 새 클레스 추가 업데이트
 
 ### DriveBase
 #### 주행 기반 코드 통합 클래스

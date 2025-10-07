@@ -26,11 +26,8 @@ public class BasicSimpleAprilCamera extends LinearOpMode {
          * 필수 인자:
          * - hardwareMap : 하드웨어 맵
          *
-         * 1. 카메라 정의 (필수)
-         * - 카메라 이름 정의
-         * - hardwareMap Configure 이름으로 등록 필수
          *
-         * 2. 카메라 파이프라인(용도) 정의 (선택)
+         * 1. 카메라 파이프라인(용도) 정의 (선택)
          * - 역할: 카메라 출력 형태 또는 카메라 사용 용도 정의
          * - 기본값: SimpleCamera.Pipeline.NORMAL (April Tag 인식 불가)
          * - 값:
@@ -42,18 +39,24 @@ public class BasicSimpleAprilCamera extends LinearOpMode {
          *   - GRAY_SCALE   : 흑백 카메라 화면을 출력
          *   - APRIL_TAG    : April Tag 인식용 모드 (기본 카메라 화면)
          *
+         * 1. 카메라 정의 (선택)
+         * - 역할: 카메라 이름 정의
+         * - 기본값: "Webcam 1"
+         * - 값: hardwareMap Configure 이름으로 등록 필수
+         *
          * 3. 화면 해상도 width/height 설정 (선택)
          * - 기본값 : 640, 480 (추천)
          *
          * ================================
          */
-        SimpleCamera simpleCamera = new SimpleCamera(
-                hardwareMap,
-                "Webcam 1",
-                SimpleCamera.Pipeline.APRIL_TAG,
-                640,
-                480
-        );
+//      SimpleCamera simpleCamera = new SimpleCamera(
+//               hardwareMap,
+//                "Webcam 1",
+//                SimpleCamera.Pipeline.APRIL_TAG,
+//                640,
+//                480
+//      );
+        SimpleCamera simpleCamera = new SimpleCamera(hardwareMap, SimpleCamera.Pipeline.APRIL_TAG);
 
         /*
          * ================================

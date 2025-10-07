@@ -48,6 +48,10 @@ public class DriveBase {
         BRAKE, FLOAT
     }
 
+    public DriveBase(HardwareMap hardwareMap, Gamepad gamepad) {
+        this(hardwareMap, gamepad, "leftfront", "leftback", "rightfront", "rightback", MotorBrake.BRAKE, Direction.FORWARD, ()->gamepad.left_stick_x, ()->-gamepad.left_stick_y, ()->gamepad.right_stick_x);
+    }
+
     public DriveBase(HardwareMap hardwareMap, Gamepad gamepad, String leftFront, String leftBack, String rightFront, String rightBack) {
         this(hardwareMap, gamepad, leftFront, leftBack, rightFront, rightBack, MotorBrake.BRAKE, Direction.FORWARD, ()->gamepad.left_stick_x, ()->-gamepad.left_stick_y, ()->gamepad.right_stick_x);
     }
@@ -87,13 +91,15 @@ public class DriveBase {
         vRevered = null;
     }
 
-    public void setHeadless(IMUType type, String name, Integer xOffset, Integer yOffset, Direction revered) {
+    public void setHeadless(IMUType type) {
+        setHeadless(type, "imu", Direction.FORWARD);
+    }
+    public void setHeadless(IMUType type, String name, Direction revered) {
         pp = null;
         imu = null;
         switch (type) {
             case PINPOINT:
                 pp = hm.get(GoBildaPinpointDriver.class, name);
-                pp.setOffsets(xOffset,yOffset, DistanceUnit.MM);
                 pp.resetPosAndIMU();
                 break;
             case BNO055IMU:
@@ -107,6 +113,7 @@ public class DriveBase {
         ppRevered = revered;
     }
 
+    public void setBreak() { setBreak(MotorBrake.BRAKE); }
     public void setBreak(MotorBrake brake) {
         this.brake = brake;
 
@@ -126,7 +133,7 @@ public class DriveBase {
             default: break;
         }
     }
-
+    public void setDirection(MotorDirection motorDirection) { setDirection(motorDirection, Direction.FORWARD); }
     public void setDirection(MotorDirection motorDirection ,Direction direction) {
         DcMotorSimple.Direction _direction = (direction == Direction.FORWARD) ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE;
 
@@ -138,7 +145,7 @@ public class DriveBase {
             default: break;
         }
     }
-
+    public void setGovernor() { setGovernor(()->gp.right_stick_y, 1.0, -1.0);}
     public void setGovernor(Supplier<Float> governorKey, Double minValue, Double maxValue) {
         gKey = governorKey;
         this.minValue = minValue;
@@ -157,8 +164,8 @@ public class DriveBase {
             double heading = 0;
 
             switch (ppRevered) {
-                case FORWARD: heading = pos.getHeading(AngleUnit.RADIANS); break;
-                case REVERSE: heading = -pos.getHeading(AngleUnit.RADIANS); break;
+                case FORWARD: heading = -pos.getHeading(AngleUnit.RADIANS); break;
+                case REVERSE: heading = pos.getHeading(AngleUnit.RADIANS); break;
                 default: break;
             }
 
@@ -170,8 +177,8 @@ public class DriveBase {
             double heading = 0;
 
             switch (ppRevered) {
-                case FORWARD: heading = imu.getAngularOrientation().firstAngle; break;
-                case REVERSE: heading = -imu.getAngularOrientation().firstAngle; break;
+                case FORWARD: heading = -imu.getAngularOrientation().firstAngle; break;
+                case REVERSE: heading = imu.getAngularOrientation().firstAngle; break;
                 default: break;
             }
             double temp = ix * Math.cos(heading) + iy * Math.sin(heading);
