@@ -17,8 +17,6 @@
   * DriveBase
   * SimpleCamera
 
----
-
 # Update List
 
 ## Releases v2.3 (2025-10-07) 
@@ -32,8 +30,6 @@
    * `Java` 버전 8 에서 11로 변경
    * `Android` 버전 개선
    * `dependencies SDK` 버전 호환성 개선
-
----
 
 ## Releases v2.2 (2025-10-07) 
 #### 코드 간소화 및 사용성 개선 업데이트
@@ -53,8 +49,6 @@
    * 하드웨어 이름 정의 기본값 지원
 2. 예제 코드 설명 주석 가독성 개선
 
----
-
 ## Releases v2.1 (2025-10-06) 
 #### 지원 기능 추가 업데이트
 
@@ -65,7 +59,6 @@
    * Control Hub 내장 imu `BNO055IMU` 추가
 2. 예제 코드 설명 주석 가독성 개선
 
----
 ## Releases v2.0 (2025-10-06) 
 #### 새 클레스 추가 업데이트
 
@@ -91,7 +84,7 @@
 
 ### 예제 코드
 * DriveBase & Headless : /shtkit/src/main/java/com/shtrobotice/ShtKit/samples/BasicSimpleCamera.java
----
+
 ## Releases v1.1 (2025-10-05) 
 #### 기능 함수 추가 업데이트
 
@@ -105,7 +98,6 @@
    * 가변 키 사용을 통해 속도 세부 가변 조정 사용 가능
 3. 예제 코드 설명 주석 가독성 개선
 
----
 ## Releases v1.0 (2025-10-04) 
 #### 새 클레스 추가 업데이트
 
