@@ -1,0 +1,32 @@
+plugins {
+    id 'com.android.library'
+}
+
+repositories {
+    maven {
+        url = 'https://maven.brott.dev/'
+    }
+}
+
+android {
+    namespace "com.robotice.roadrunner"
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 34
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+dependencies {
+    implementation project(':FtcRobotController')
+    implementation project(':FtcDashboard')
+    implementation "com.acmerobotics.roadrunner:ftc:0.1.23"
+    implementation "com.acmerobotics.roadrunner:core:1.0.1"
+    implementation "com.acmerobotics.roadrunner:actions:1.0.1"
+    implementation "com.acmerobotics.dashboard:dashboard:0.4.17"
+}
