@@ -9,8 +9,6 @@
 
 ## FTC Software Working Kit
 
----
-
 * #### Features
   * 사용 기능 통합화
   * 기능별 사용성 개선
@@ -22,8 +20,6 @@
 ---
 
 # Update List
-
----
 
 ## Releases v2.3 (2025-10-07) 
 #### RoadRunner 모듈 추가 및 버전 정리 업데이트
