@@ -83,7 +83,7 @@ public class SimpleCamera {
             public void onOpened() {
                 webcam.startStreaming(width, height, OpenCvCameraRotation.UPRIGHT);
 
-                FtcDashboard.getInstance().startCameraStream(webcam, 0);
+                FtcDashboard.getInstance().startCameraStream(webcam, 60);
             }
 
             @Override
