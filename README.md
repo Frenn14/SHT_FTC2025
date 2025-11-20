@@ -19,6 +19,12 @@
 
 # Update List
 
+## Releases v2.4 (2025-11-22)
+#### RoadRunner 버그 수정 및 Visualizer 추가
+
+1. RoadRunner 경로 테스트
+   * `RoadRunnerVisualizer` 코드 응용를 통해 경로 테스트 사용 가능
+
 ## Releases v2.3 (2025-10-07) 
 #### RoadRunner 모듈 추가 및 버전 정리 업데이트
 
