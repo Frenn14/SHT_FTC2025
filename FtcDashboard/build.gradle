@@ -97,9 +97,6 @@ repositories {
 // Probably not worth combining with addPomDependencies()
 // Keep them in sync manually
 dependencies {
-    api(project(":DashboardCore")) {
-        transitive = false
-    }
 
     api "org.firstinspires.ftc:RobotCore:$min_sdk_version"
     api "org.firstinspires.ftc:Hardware:$min_sdk_version"
