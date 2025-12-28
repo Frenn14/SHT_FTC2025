@@ -12,7 +12,7 @@ import com.robotice.Drawing;
 import com.robotice.MecanumDrive;
 import com.robotice.TankDrive;
 
-public class LocalizationTest extends LinearOpMode {
+public class  LocalizationTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
